@@ -1,6 +1,7 @@
 {
     "parserOptions": {
-        "ecmaVersion": 2019
+        "ecmaVersion": 2019,
+        "sourceType": "module"
     },
     "extends": ["eslint:recommended", "eslint-config-prettier"],
     "rules": {
