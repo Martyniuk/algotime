@@ -1,10 +1,11 @@
 class QuickUnion {
   constructor(N) {
+    if (N <= 0) {
+      throw new Error("Number of Elements should be positive");
+    }
     this._id = new Array(N).fill(0).map((_, i) => i); // [0,1,2,3,4,5,6]
     // weightening
     this._sz = new Array(N).fill(1);
-    // for find(i) that will return biggest in component
-    // this._largest = new Array(N).fill(0).map((_, i) => i); // [0,1,2,3,4,5,6]
   }
 
   getRootOf(i) {
@@ -48,9 +49,9 @@ class QuickUnion {
     }
   }
 
-  // find(i) {
-  //   return this._largest[i];
-  // }
+  componentSize(p) {
+    return this._sz[this.getRootOf(p)];
+  }
 }
 
 module.exports = QuickUnion;

@@ -9,15 +9,17 @@ const kClosest = function (points, K) {
   let distance = [];
   let closestPoints = [];
 
+  // Loop thru points list and calculate distance for points[i], push to distance array
   for (let i = 0; i < points.length; i++) {
     const point = points[i];
-    // to impl
     distance.push(calcDistance(point));
   }
-
+  // sort distance array
   distance.sort((a, b) => a - b);
+  // take last possible distance for points
   let maxAvailableDistance = distance[K - 1];
 
+  // Loop thru points and check that distance is less/equal to last possible
   for (let i = 0; i < points.length; i++) {
     const point = points[i];
     if (calcDistance(point) <= maxAvailableDistance) {
@@ -35,7 +37,7 @@ function calcDistance(point) {
   const squareA = Math.pow(a, 2);
   const squareB = Math.pow(b, 2);
 
-  // potentially we dont need to do sqrt, can be omitted
+  // potentially we don't need to do sqrt, can be simplified to 'squareA + squareB'
   return Math.sqrt(squareA + squareB);
 }
 
