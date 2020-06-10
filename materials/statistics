@@ -26,6 +26,12 @@ June:
 # Array - 1089, 88, 27, 26
 09.06:
 # Array - 1346, 941
+10.06:
+# Array - 1299, 283, 905, 1051
+# Sliding Window with incredible explanation - https://medium.com/@timpark0807/leetcode-is-easy-sliding-window-c44c11cc33e1
+    - 487. Max Consecutive Ones II
+# Binary Search - 35
+# Set - 414
 
 
 
