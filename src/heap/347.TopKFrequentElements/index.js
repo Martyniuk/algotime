@@ -4,6 +4,7 @@
  * @return {number[]}
  */
 // O(Nlogk)
+// O(n + k)
 const topKFrequent = function (nums, k) {
   const map = {};
   // loop thru nums in order to construct map with frequent values
