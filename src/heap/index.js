@@ -1,5 +1,7 @@
 const arr = [10, 20, 15, 30, 40];
 
+// Heapify is O(N) -
+// any insertion/deletion - o(logn)
 class MaxHeap {
   constructor(data = []) {
     this._data = data;
@@ -81,6 +83,89 @@ class MaxHeap {
     for (let i = this._data.length - 1; i >= 0; i--) {
       this.sink(i);
     }
+  }
+}
+
+// ================  MIN HEAP  ================
+
+class MinHeap {
+  constructor(data = []) {
+    this._heap = data;
+    this._heapify();
+  }
+  // -------
+  _getLeftChildIndex(parentIndex) {
+    return parentIndex * 2 + 1;
+  }
+  _getRightChildIndex(parentIndex) {
+    return parentIndex * 2 + 2;
+  }
+  _hasLeftChild(parentIndex) {
+    return this._getLeftChildIndex(parentIndex) < this._heap.length;
+  }
+  _hasRightChild(parentIndex) {
+    return this._getRightChildIndex(parentIndex) < this._heap.length;
+  }
+  _getParentIndex(index) {
+    return Math.floor((index - 1) / 2);
+  }
+  _hasParent(index) {
+    return this._getParentIndex(index) >= 0;
+  }
+  // ======
+
+  _swim(index) {
+    let parentIndex = this._getParentIndex(index);
+
+    while (
+      this._hasParent(index) &&
+      this._heap[index] < this._heap[parentIndex]
+    ) {
+      this._swap(index, parentIndex);
+      index = parentIndex;
+      parentIndex = this._getParentIndex(index);
+    }
+  }
+  _swap(from, to) {
+    [this._heap[to], this._heap[from]] = [this._heap[from], this._heap[to]];
+  }
+  _sink(parentIndex) {
+    while (this._hasLeftChild(parentIndex)) {
+      let smallestElementIndex = this._getLeftChildIndex(parentIndex);
+
+      if (
+        this._hasRightChild(parentIndex) &&
+        this._heap[this._getLeftChildIndex(parentIndex)] >
+          this._heap[this._getRightChildIndex(parentIndex)]
+      ) {
+        smallestElementIndex = this._getRightChildIndex(parentIndex);
+      }
+
+      if (this._heap[parentIndex] < this._heap[smallestElementIndex]) {
+        break;
+      } else {
+        this._swap(parentIndex, smallestElementIndex);
+        parentIndex = smallestElementIndex;
+      }
+    }
+  }
+  _heapify() {
+    for (let i = this._heap.length - 1; i >= 0; i--) {
+      this._sink(i);
+    }
+  }
+  insert(val) {
+    this._heap.push(val);
+    let lastIndex = this._heap.length - 1;
+    this._swim(lastIndex);
+  }
+  delete() {
+    this._swap(0, this._heap.length - 1);
+    let deleted = this._heap.pop();
+
+    this._sink(0);
+
+    return deleted;
   }
 }
 
