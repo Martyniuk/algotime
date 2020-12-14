@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="started">
+        <button id="btn">Click me</button>
+    </div>
+    <div id="root1">
+        <ul>
+          <li>li1</li>
+          <li>li2</li>
+        </ul>
+        <div></div>
+        <div></div>
+        <div></div>
+        <section>
+          <h4 id="tofind">this node to find</h4>
+          <div>content</div>
+        </section>
+      </div>
+
+      <div id="root2">
+        <ul>
+          <li>li1</li>
+          <li>li2</li>
+        </ul>
+        <div></div>
+        <div></div>
+        <div></div>
+        <section>
+          <h4>this node to find</h4>
+          <div>content</div>
+        </section>
+      </div>
+    <script>
+        const btn = document.getElementById('btn');
+        const element = document.getElementById('tofind');
+        let root = document.getElementById('root2');
+
+        btn.addEventListener('click', () => {
+            const pathToNode = getPathToNode(element, root);
+            console.log('pathToNode', pathToNode);
+
+            let curr = root;
+            while(pathToNode.length) {
+                curr = curr.children[pathToNode.pop()];
+            }
+
+            console.log('element', curr);
+        });
+
+        function getPathToNode(node) {
+            // corner cases
+            let parent = node.parentNode;
+            const path = [];
+            // debugger;
+            while(parent ) {
+                // debugger;
+                let elementIndex = Array.from(parent.children).indexOf(node);
+                path.push(elementIndex);
+                // debugger;
+                node = parent;
+                parent = parent.parentNode;
+                // debugger;
+            }
+            // debugger;
+            return path;
+        }
+
+    </script>
+</body>
+</html>
